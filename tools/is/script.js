@@ -122,29 +122,22 @@ document.getElementById("calibrateBtn").addEventListener('click', function () {
     const calibrateBtn = this; // 保存按钮的引用
     calibrateBtn.disabled = true; // 禁用按钮，防止重复点击
 
-    // 启用 turnstile 验证
-    document.getElementById('turnstile').innerHTML = `
-        <div class="cf-turnstile" 
-             data-sitekey="0x4AAAAAACl-8md3DM_LOzG0" 
-             data-callback="onVerify">
-        </div>
-    `;
+    turnstile.render('#turnstile-container', {
+        sitekey: '0x4AAAAAACl-8md3DM_LOzG0',
+        callback: function(token) {
+            console.log('验证成功:', token);
+            getCurrentTime();
+            setTimeout(() => {
+                calibrate();
+            }, 1000);
 
-    // 定义验证成功后的回调函数
-    window.onVerify = function (token) {
-        console.log("验证成功，收到的 token:", token);
-
-        // 调用 getCurrentTime 和 calibrate
-        getCurrentTime();
-        setTimeout(() => {
-            calibrate();
-        }, 1000);
-
-        // 10 秒后重新启用按钮
-        setTimeout(() => {
-            calibrateBtn.disabled = false;
-        }, 10000);
-    };
+            // 10 秒后重新启用按钮
+            setTimeout(() => {
+                calibrateBtn.disabled = false;
+            }, 10000);
+        }
+    });
+        
 });
 function updateTime() {
     const now = new Date(); 
