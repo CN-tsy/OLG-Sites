@@ -1,4 +1,4 @@
-console.log('is/ script.js v=2.2');
+console.log('is/ script.js v=3.0');
 let name_=document.querySelector('.name');
 let isHaveInfo=false;
 
