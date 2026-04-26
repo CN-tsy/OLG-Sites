@@ -81,7 +81,7 @@ body {
             </code></pre>
             <div id="calibrateTime">
                 <p>JS中new Date()获取的是本地时间，请尝试<button style='color:blue;border: none;' id="calibrateBtn" >校准时间</button></p>
-                <div id="turnstile"></div>
+                <div id="turnstile-container"></div>
                 <div id="calibrateMain">
                     <p id="calibrateStatus">Uncalibrated 未校准</p>
                     <div id="calibrateResult"></div>
@@ -108,5 +108,7 @@ body {
     <script src="https://tsy-learn-en.pages.dev/cscript_Hamburger.js"></script>
     <script src="script.js">
     </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+
 </body>
 </html>
