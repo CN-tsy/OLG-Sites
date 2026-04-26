@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>考试指令系统</title>
+    <title>考试指令系统-tsy</title>
     <link href="https://tsy-learn-en.pages.dev/cstyle_hamburger.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.2/dist/axios.min.js"></script>
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
@@ -58,6 +59,7 @@ const Exam={
 }
                 </code>
             </pre>
+            <h3 id="styleshower">CSS样式</h3>
             <pre class="TokyoNight"><code class="language-css">
 body {
     font-family: 'Noto Sans', sans-serif;
@@ -77,6 +79,14 @@ body {
     font-size: 50px;
 }
             </code></pre>
+            <div id="calibrateTime">
+                <p>JS中new Date()获取的是本地时间，请尝试<button style='color:blue;border: none;' id="calibrateBtn" >校准时间</button></p>
+                <div id="turnstile"></div>
+                <div id="calibrateMain">
+                    <p id="calibrateStatus">Uncalibrated 未校准</p>
+                    <div id="calibrateResult"></div>
+                </div>
+            </div>
         </div>
         <div class="overlay"></div>
         <h2 class="sub"></h2>
