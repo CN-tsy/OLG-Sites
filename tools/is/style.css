@@ -55,6 +55,9 @@ footer {
 .menu a:hover {
     text-decoration: underline;
 }
+.menu p {
+    color:black;
+}
 .menu {
     padding-top: 50px;
     padding-left: 10px;
@@ -67,6 +70,7 @@ footer {
     transition: left 0.3s ease;
     z-index: 90;
     color: black;
+    box-sizing: border-box;
     overflow-y: auto;
 }
 .menu.active {
@@ -89,6 +93,19 @@ footer {
 .overlay.active {
     opacity: 1;
     visibility: visible;
+}
+#calibrateStatus {
+    display: flex;
+    align-items: center;
+}
+#calibrateStatus::before  {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--before-bg-color,gray);
+    margin-right: 5px;
 }
 /* Input container */
 .input-container {
