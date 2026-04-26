@@ -1,3 +1,4 @@
+console.log('is/ script.js v=2.2');
 let name_=document.querySelector('.name');
 let isHaveInfo=false;
 
@@ -48,6 +49,103 @@ Cbtn.addEventListener("click", () => {
     console.log(Exam);
 });
 
+let currentT = '';
+function getCurrentTime(){
+    const data = null;
+
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener('readystatechange', function () {
+        if (this.readyState === this.DONE) {
+            console.log(this.responseText);
+            currentT=this.responseText;
+            //console.log(this.responseText.substring(39,47));
+        }
+    });
+
+    xhr.open('GET', 'https://world-time-api3.p.rapidapi.com/timezone/Asia/Shanghai.txt');
+    xhr.setRequestHeader('x-rapidapi-key', '799934e3a2msh685215e540a345ep1a5c38jsnb54229037a61');
+    xhr.setRequestHeader('x-rapidapi-host', 'world-time-api3.p.rapidapi.com');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.send(data);
+};
+
+function calibrate(){
+    function getTimeDifference(t1, t2) {
+        // 将时间字符串拆分为小时、分钟和秒
+        const [h1, m1, s1] = t1.split(':').map(Number);
+        const [h2, m2, s2] = t2.split(':').map(Number);
+    
+        // 将时间转换为总秒数
+        const totalSeconds1 = h1 * 3600 + m1 * 60 + s1;
+        const totalSeconds2 = h2 * 3600 + m2 * 60 + s2;
+    
+        // 计算差值
+        return totalSeconds1 - totalSeconds2;
+    }
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0'); 
+
+    const localTstr= `${hours}:${minutes}:${seconds}`;
+    const currentTObj = {
+        time: currentT.substring(39,47),
+        inaccuracy: '±300ms',
+        localtime: localTstr,
+        difference: getTimeDifference(localTstr, currentT.substring(39,47))
+    }
+    console.group("caliInfo");
+    console.log(currentTObj);
+    console.table(currentTObj);
+    console.groupEnd('caliInfo');
+
+    document.getElementById("calibrateStatus").textContent = "pending... 校准中";
+    const status=document.getElementById("calibrateStatus");
+    status.style.setProperty('--before-bg-color','yellow');
+    setTimeout(()=>{
+        document.getElementById("calibrateStatus").textContent = "Success";
+        status.style.setProperty('--before-bg-color','green');
+        document.getElementById("calibrateResult").innerHTML = `
+            <p>校准结果:</p>
+            <p>currentTime:${currentTObj.time}</p>
+            <p>CurrentTimeInaccuracy:${currentTObj.inaccuracy}</p>
+            <p>localtime:${currentTObj.localtime}</p>
+            <p>localTime与currentTime的差值（秒）:${currentTObj.difference}</p>
+            <p>${currentTObj.difference<=2?'无需调整您设备的时间':'建议调整您设备的时间'}</p>
+        `;
+    },2000);
+}
+document.getElementById("calibrateBtn").addEventListener('click', function () {
+    const calibrateBtn = this; // 保存按钮的引用
+    calibrateBtn.disabled = true; // 禁用按钮，防止重复点击
+
+    // 启用 turnstile 验证
+    document.getElementById('turnstile').innerHTML = `
+        <div class="cf-turnstile" 
+             data-sitekey="0x4AAAAAACl-8md3DM_LOzG0" 
+             data-callback="onVerify">
+        </div>
+    `;
+
+    // 定义验证成功后的回调函数
+    window.onVerify = function (token) {
+        console.log("验证成功，收到的 token:", token);
+
+        // 调用 getCurrentTime 和 calibrate
+        getCurrentTime();
+        setTimeout(() => {
+            calibrate();
+        }, 1000);
+
+        // 10 秒后重新启用按钮
+        setTimeout(() => {
+            calibrateBtn.disabled = false;
+        }, 10000);
+    };
+});
 function updateTime() {
     const now = new Date(); 
     const Now_hours = String(now.getHours()).padStart(2, '0');   
@@ -60,6 +158,7 @@ function updateTime() {
 updateTime();
 setInterval(updateTime, 1000);
 
+//Belows are updateExamStatus()
 function updateExamStatus() {
     if(!isHaveInfo){
         return;
@@ -133,7 +232,7 @@ toggleCheckbox.addEventListener('change', (event) => {
 });
 
 
-function forcecStartExam(){
+function updateInfo(){
     if(!confirm("使用这种方式开考不会对输入的信息进行任何格式检查，确认后考试立即开始")){
         console.log('已终止');
         return;
