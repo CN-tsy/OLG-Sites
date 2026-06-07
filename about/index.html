@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About|Learn EN</title>
     <link href="../cstyle.css" rel="stylesheet">
-    <link href="../cstyle_hamburger.css" rel="stylesheet">
+    <link href="../cstyle-hamburger.css" rel="stylesheet">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <header class="flex">
-        <h1>TSY Learn English</h1>
+        <h1 id="largeTitle">About</h1>
         <label class="hamburger">
             <input type="checkbox">
             <svg viewBox="0 0 32 32">
@@ -24,8 +24,7 @@
     </header>
     <h2 class="pageTitle flex">About</h2>
     <main>
-        这个网站非盈利，为提供学习指引而存在<br>
-        任何人都可以免费访问和使用<br>
+        这个网站非盈利，用于发表个人看法、Blog和一些网络作品，内容不代表任何组织和个人的立场<br>
         如果你对这个网站有任何Bug反馈，请随时联系<br>
         如果验证失败，那么请尝试刷新页面或者更换浏览器(edge等内核较新的)<br>
         <span style="text-decoration: line-through;">你先想想你来这里是不是不怀好意</span>
@@ -34,20 +33,19 @@
             <div class="cf-turnstile" data-sitekey="0x4AAAAAACl-8md3DM_LOzG0" data-callback="onVerify"></div>
             <button onclick="location.href='mailto:tsyincq@qq.com';" disabled>Email us</button>
         </form>
-        Developer: TSY<br>
-        文章作者：TSY、Color、C17、C19<br>
+        Developer: OLG-Sy. T.<br>
+        文章作者：OLG Team Members<br>
     </main>
     <footer class="flex"></footer>
     <script>
         const l=1;
     </script>
-    <script src="../cscript_docFillIn.js"></script>
-    <script src="../cscript_Hamburger.js"></script>
+    <script src="../cscript-doc-fill-in.js"></script>
+    <script src="../cscript-hamburger.js"></script>
     <script>
         console.log("cf");
         const btn = document.querySelector('form button');
         function onVerify(token) {
-            // 解锁按钮
             btn.disabled = false;
             btn.style.opacity = '1';
             btn.style.cursor = 'pointer';
