@@ -2,11 +2,13 @@ console.log('Learn-en/cscript_docFillIn.js v=1.0-Beta');
 const footer=document.querySelector('footer');
 const nav=document.querySelector('.nav');
 const menu=document.querySelector('.menu');
+const sitename='OLG Sites';
 let Nav1='index.html';
 let Nav2='';
 let Nav3='about/index.html';
-const Nav4='';
+let Nav4='';
 
+document.getElementById('largeTitle').innerhtml+='|'+sitename;
 footer.innerHTML=`<p>本网站由<a href='https://dash.cloudflare.com/' target='_blank'>cloudflare</a>部署</p>
 <p>Developed by TSY MMXXVI</p>`;
 function fixhref(h,l){
@@ -18,7 +20,7 @@ function fixhref(h,l){
     console.log('fixhref:'+R);
     return R;
 }
-function deving(href,l){
+function deving(href){
     if(href===''){
         href='developing.html';
         console.log(`deving:${href}`);
@@ -26,7 +28,7 @@ function deving(href,l){
     return href;
 }
 function gethref(Nav1,Nav2,Nav3,Nav4){
-    const content1='首页',content2='提升',content3='关于',content4='undefined';
+    const content1='首页',content2='undefined',content3='关于',content4='undefined';
     nav.innerHTML=`
     <a href='${Nav1}' class='_1' style='--i:1'>${content1}</a>
     <a href='${Nav2}' class='_2' style='--i:2'>${content2}</a>
