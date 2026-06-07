@@ -5,10 +5,10 @@ const menu=document.querySelector('.menu');
 let Nav1='index.html';
 let Nav2='';
 let Nav3='about/index.html';
-const Nav4='https://www.bbc.co.uk/learningenglish/chinese/home';
+const Nav4='';
 
 footer.innerHTML=`<p>本网站由<a href='https://dash.cloudflare.com/' target='_blank'>cloudflare</a>部署</p>
-<p>Developed by TSY 2026</p>`;
+<p>Developed by TSY MMXXVI</p>`;
 function fixhref(h,l){
     let R='';
     for(let i=0;i<l;i++){
@@ -26,7 +26,7 @@ function deving(href,l){
     return href;
 }
 function gethref(Nav1,Nav2,Nav3,Nav4){
-    const content1='首页',content2='提升',content3='关于',content4='Learn From BBC';
+    const content1='首页',content2='提升',content3='关于',content4='undefined';
     nav.innerHTML=`
     <a href='${Nav1}' class='_1' style='--i:1'>${content1}</a>
     <a href='${Nav2}' class='_2' style='--i:2'>${content2}</a>
@@ -41,11 +41,6 @@ function gethref(Nav1,Nav2,Nav3,Nav4){
     `;
 
 }
-Nav1=deving(Nav1,l);
-Nav2=deving(Nav2,l);
-Nav3=deving(Nav3,l);
-Nav1=fixhref(Nav1,l);
-Nav2=fixhref(Nav2,l);
-Nav3=fixhref(Nav3,l);
+Nav1=deving(Nav1,l);Nav2=deving(Nav2,l);Nav3=deving(Nav3,l);
+Nav1=fixhref(Nav1,l);Nav2=fixhref(Nav2,l);Nav3=fixhref(Nav3,l);
 gethref(Nav1,Nav2,Nav3,Nav4);
-
